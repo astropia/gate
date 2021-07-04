@@ -4,10 +4,14 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
+export const NamedRoute = {
+  HOMEPAGE: 'Home',
+}
+
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: NamedRoute.HOMEPAGE,
     component: Home,
   },
   {
