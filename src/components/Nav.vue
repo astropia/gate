@@ -64,6 +64,7 @@ export default {
   display flex
   justify-content flex-end
   align-items center
+  z-index 100
   transition transform .4s
 
   .main-title

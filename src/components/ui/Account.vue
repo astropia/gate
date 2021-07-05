@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="address">{{ address }}</div>
+    <div v-if="address" class="_fc">{{ address }}</div>
     <div v-else class="connect-account" @click="connect">
       <img height="24" src="@/assets/logos/metamask.svg" />
       <span>Connect to MetaMask</span>

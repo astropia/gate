@@ -18,6 +18,7 @@ export default {
 
 <style lang="stylus">
 #app
-  position relative
+  padding-top 150px
   min-width 1440px
+  position relative
 </style>
