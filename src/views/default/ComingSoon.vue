@@ -9,7 +9,8 @@
 // eslint-disable-next-line prettier/prettier
 const buildingPath = [
   '/heros',
-  '/backpack',
+  '/mine/heros',
+  '/mine/backpack',
   '/explore',
 ]
 

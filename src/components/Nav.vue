@@ -1,6 +1,12 @@
 <template>
   <nav id="astro-nav" :class="{ 'nav-home': status === NavStatus.AT_HOME }">
-    <router-link class="main-title _fm" to="/">Astropia</router-link>
+    <div class="left-part">
+      <router-link v-if="status === NavStatus.NORMAL" class="back-home _fm" to="/">Home</router-link>
+      <router-link v-else class="main-title _fm" to="/">Astropia</router-link>
+    </div>
+    <div class="center-title">
+      <span v-if="status === NavStatus.NORMAL" class="_fm">{{ title }}</span>
+    </div>
     <div class="right-part">
       <div class="account" :class="{ 'account-home': status === NavStatus.AT_HOME }">
         <Account />
@@ -9,11 +15,11 @@
         <div class="nav-buttons" v-if="status === NavStatus.AT_HOME">
           <div>
             <i />
-            <router-link to="heros" class="_fm">My Heroes</router-link>
+            <router-link to="/mine/heros" class="_fm">My Heroes</router-link>
           </div>
           <div>
             <i />
-            <router-link to="backpack" class="_fm">My Backpack</router-link>
+            <router-link to="/mine/backpack" class="_fm">My Backpack</router-link>
           </div>
         </div>
       </transition>
@@ -26,6 +32,7 @@ import { NamedRoute } from '@/router'
 import Account from '@/components/ui/Account'
 
 const NavStatus = {
+  ERROR: -1,
   NORMAL: 0,
   AT_HOME: 1,
 }
@@ -45,9 +52,15 @@ export default {
       switch (this.$route.name) {
         case NamedRoute.HOMEPAGE:
           return NavStatus.AT_HOME
+        case NamedRoute.EMPTY:
+        case NamedRoute.HOLDING:
+          return NavStatus.ERROR
         default:
           return NavStatus.NORMAL
       }
+    },
+    title() {
+      return this.$route.name
     },
   },
 }
@@ -66,16 +79,37 @@ export default {
   align-items center
   z-index 100
   transition transform .4s
+  .left-part
+    flex 0 0 500px
+  .right-part
+    flex 0 0 500px
+    height 0
+    position relative
+  .center-title
+    flex 1 1 auto
+    text-align center
+    font-size 30px
 
   .main-title
     position absolute
     top 16px
     left 90px
     font-size 100px
-
-  .right-part
-    height 0
+  .back-home
+    font-size 30px
     position relative
+    display flex
+    align-items center
+    &:before
+      content ''
+      margin-right 30px
+      width 36px
+      height 36px
+      border-top solid #fff 3px
+      border-left solid #fff 3px
+      box-sizing border-box
+      transform rotate(-45deg)
+
   .account
     position absolute
     top -20px
