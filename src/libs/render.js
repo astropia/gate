@@ -116,6 +116,9 @@ export default async (metadata, index = 0) => {
       return {
         canvas,
         render,
+        stop() {
+          renderer.forceContextLoss()
+        },
       }
     })
 }

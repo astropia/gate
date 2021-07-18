@@ -18,6 +18,9 @@ export default {
       address: (state) => state.user.address,
     }),
   },
+  mounted() {
+    this.connect()
+  },
   methods: {
     async connect() {
       if (typeof window.ethereum === 'undefined') {
