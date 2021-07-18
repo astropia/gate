@@ -9,18 +9,18 @@ import Mirror from '@tarii/mirror'
 
 // eslint-disable-next-line prettier/prettier
 const LIST = [
-  '/assets/citizen/main.gltf',
-  '/assets/hunter/main.gltf',
-  '/assets/witch/main.gltf',
+  './assets/citizen/main.gltf',
+  './assets/hunter/main.gltf',
+  './assets/witch/main.gltf',
 ]
 
 const map = [
-  '/skybox/right.jpg',
-  '/skybox/left.jpg',
-  '/skybox/top.jpg',
-  '/skybox/bottom.jpg',
-  '/skybox/front.jpg',
-  '/skybox/back.jpg',
+  './skybox/right.jpg',
+  './skybox/left.jpg',
+  './skybox/top.jpg',
+  './skybox/bottom.jpg',
+  './skybox/front.jpg',
+  './skybox/back.jpg',
 ]
 const envMap = new THREE.CubeTextureLoader().load(map)
 
@@ -28,7 +28,7 @@ const WIDTH = 500
 const HEIGHT = 1000
 
 export default async (metadata, index = 0) => {
-  const mirror = new Mirror()
+  const mirror = new Mirror({ publicPath: './assets/' })
 
   const scene = new THREE.Scene()
   const canvas = document.createElement('canvas')
