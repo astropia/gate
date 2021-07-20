@@ -45,7 +45,7 @@ export default async (metadata, index = 0) => {
 
   const aspect = WIDTH / HEIGHT
   const camera = new THREE.PerspectiveCamera(24, aspect, 1, 100)
-  camera.position.set(0, 2, 13)
+  camera.position.set(0, 3, 13)
   camera.lookAt(0, 2.5, 0)
   camera.up.set(0, 1, 0)
   scene.add(camera)
@@ -96,6 +96,10 @@ export default async (metadata, index = 0) => {
     if (mixer) {
       mixer.update(clock.getDelta())
     }
+    const t = 2 * clock.getElapsedTime() + 0.05
+    const a = (t - 1) / Math.log(t) - 3
+    camera.position.set(Math.sin(a) * 13, 4, Math.cos(a) * 13)
+    camera.lookAt(0, 2.5, 0)
     envLight.intensity = Math.sin(clock.oldTime / 1000) * 0.1 + 0.7
     composer.render()
   }

@@ -9,7 +9,27 @@
 </template>
 
 <script>
+/* eslint-disable no-unused-vars */
 import { mapState } from 'vuex'
+
+const CHAIN = {
+  chainId: '0x61',
+  chainName: 'BSC Test',
+  nativeCurrency: {
+    name: 'BNB',
+    symbol: 'BNB',
+    decimals: 18,
+  },
+  rpcUrls: [
+    'https://data-seed-prebsc-1-s1.binance.org:8545/',
+    'https://data-seed-prebsc-2-s1.binance.org:8545/',
+    'https://data-seed-prebsc-1-s2.binance.org:8545/',
+    'https://data-seed-prebsc-2-s2.binance.org:8545/',
+    'https://data-seed-prebsc-1-s3.binance.org:8545/',
+    'https://data-seed-prebsc-2-s3.binance.org:8545/',
+  ],
+}
+const NETWORK = CHAIN.chainId
 
 export default {
   name: 'Account',
@@ -27,23 +47,9 @@ export default {
         // TODO error message
         return
       }
-      const comit = this.$store.commit
-      const status = await window.ethereum
-        .request({ method: 'eth_requestAccounts' })
-        .then((accounts) => {
-          // this.chainId = Number(window.ethereum.chainId)
-          comit('UPDATE_ADDRESS', accounts[0])
-          return true
-        })
-        .catch(() => false)
-      if (!status) {
-        // TODO error message
-        return
-      }
-
-      window.ethereum.addListener('accountsChanged', (accounts) => {
-        comit('UPDATE_ADDRESS', accounts[0])
-      })
+      await this.updateAccount()
+      await this.updateChain()
+      // window.ethereum.request({ method: 'eth_chainId' }).then(console.log)
       // window.ethereum.addListener('chainChanged', this.updateChain)
       this.$store.commit('SET_CONNERCTOR', {
         connector: {
@@ -54,6 +60,54 @@ export default {
             }),
         },
       })
+    },
+    async updateAccount() {
+      const commit = this.$store.commit
+      const status = await window.ethereum
+        .request({ method: 'eth_requestAccounts' })
+        .then((accounts) => {
+          commit('UPDATE_ADDRESS', accounts[0])
+          return true
+        })
+        .catch(() => false)
+      if (!status) {
+        // TODO error message
+        return
+      }
+
+      window.ethereum.addListener('accountsChanged', (accounts) => {
+        commit('UPDATE_ADDRESS', accounts[0])
+      })
+    },
+    async updateChain() {
+      if (typeof window.ethereum === 'undefined') {
+        return
+      }
+      return window.ethereum
+        .request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: NETWORK }],
+        })
+        .catch((e) => {
+          switch (e.code) {
+            case 4902: // Unrecognized chain ID
+              return this.addChain()
+            case 4001: // User rejected the request.
+            default:
+              return
+          }
+        })
+    },
+    async addChain() {
+      if (typeof window.ethereum === 'undefined') {
+        return
+      }
+      return window.ethereum
+        .request({
+          method: 'wallet_addEthereumChain',
+          params: [CHAIN],
+        })
+        .catch()
     },
   },
 }
