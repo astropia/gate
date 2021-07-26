@@ -1,22 +1,19 @@
 <template>
   <div class="heros">
     <div class="menu">
-      <p class="_fm">Currently Have</p>
-      <ul>
-        <li v-for="id in list" :key="id" @click="load(id)" :act="focus === id">{{ display(id) }}</li>
-        <li v-if="list.length == 0">Empty</li>
-      </ul>
-      <div class="hero-ecruit _fm" @click="mint">Recruit</div>
+      <p class="_fm">ID</p>
+      <div class="preview-id">
+        {{ display(id) }}
+      </div>
+      <div class="hero-ecruit _fm" @click="update">Update</div>
     </div>
     <div id="hero-canvas-container"></div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
-import { hash, txFinished, allNFTs, mintTx } from '@/libs/chain'
-import loader from '@/libs/render'
+import { hash } from '@/libs/chain'
+import loader, { LIST } from '@/libs/render'
 
 export default {
   name: 'Heros',
@@ -27,20 +24,8 @@ export default {
       prevStop: null,
 
       list: [],
-      focus: '',
-      txHash: '',
+      id: '',
     }
-  },
-  computed: {
-    ...mapState({
-      address: (state) => state.user.address,
-      connector: (state) => state.connector,
-    }),
-  },
-  watch: {
-    address() {
-      this.update()
-    },
   },
   mounted() {
     this.raf = requestAnimationFrame(this.render)
@@ -54,12 +39,10 @@ export default {
   },
   methods: {
     async update() {
-      if (!this.address) {
-        this.list = []
-      } else {
-        this.list = await allNFTs(this.address)
-      }
-      this.load(this.list[0])
+      const salt = hash(new Date().toLocaleString()).substr(2, 30)
+      const index = Math.floor(Math.random() * LIST.length)
+      this.id = '0x8000000000417374726f70696172ffff' + index.toString(16).padStart(2, '0') + salt
+      this.load(this.id)
     },
     async load(id) {
       this.draw = null
@@ -81,29 +64,6 @@ export default {
       this.draw = render
       this.prevStop = stop
       container.appendChild(canvas)
-    },
-    async mint() {
-      if (!this.address || !this.connector) {
-        return
-      }
-      const tx = mintTx(this.address)
-      const txHash = await this.connector.sendTransaction(tx).catch(() => false)
-      if (!txHash) {
-        return
-      }
-      this.txHash = txHash
-      this.check()
-    },
-    async check() {
-      if (!this.txHash) {
-        return
-      }
-      const status = await txFinished(this.txHash)
-      if (status) {
-        this.txHash = ''
-        this.update()
-      }
-      setTimeout(this.check, 2000)
     },
     render() {
       if (this.draw) {
@@ -170,6 +130,17 @@ export default {
   font-size 24px
   text-decoration underline
   cursor pointer
+.hero-preview
+  display inline-block
+  margin-top 16px
+  color #c5cae9
+  opacity .4
+  transition opacity .2s
+  &:hover
+    opacity 1
+.preview-id
+  font-size 18px
+  font-family monospace
 
 @keyframes move
   0%

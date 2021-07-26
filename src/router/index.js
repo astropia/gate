@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../views/Home.vue'
-import Heros from '../views/Heros'
+import Home from '../views/Home'
+import Heros from '../views/Heros/index'
+import HerosPreview from '../views/Heros/Preview'
 
 import ComingSoon from '../views/default/ComingSoon'
 import Empty from '../views/default/Empty'
@@ -25,6 +26,11 @@ const routes = [
     path: '/heros',
     name: 'Heros',
     component: Heros,
+  },
+  {
+    path: '/heros/preview',
+    name: 'Heros Preview',
+    component: HerosPreview,
   },
   {
     path: '/404',

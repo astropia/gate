@@ -7,8 +7,7 @@ import { SAOPass } from 'three/examples/jsm/postprocessing/SAOPass'
 
 import Mirror from '@tarii/mirror'
 
-// eslint-disable-next-line prettier/prettier
-const LIST = [
+export const LIST = [
   './assets/citizen/main.gltf',
   './assets/hunter/main.gltf',
   './assets/witch/main.gltf',
