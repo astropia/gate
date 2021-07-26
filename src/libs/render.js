@@ -12,6 +12,8 @@ const LIST = [
   './assets/citizen/main.gltf',
   './assets/hunter/main.gltf',
   './assets/witch/main.gltf',
+  './assets/girl/main.gltf',
+  './assets/scientist/main.gltf',
 ]
 
 const map = [
