@@ -3798,7 +3798,28 @@
                     "S" : [0.48, 0.55],
                     "L" : [0.5, 0.76]
                 },
-                "map": "_common/makeup/0004.png"
+                "map": {
+                    "offset": 6,
+                    "list": [
+                        "_common/makeup/1/matBodyColor.png",
+                        "_common/makeup/2/matBodyColor.png",
+                        "_common/makeup/3/matBodyColor.png",
+                        "_common/makeup/4/matBodyColor.png",
+                        "_common/makeup/5/matBodyColor.png",
+                        "_common/makeup/6/matBodyColor.png",
+                        "_common/makeup/7/matBodyColor.png",
+                        "_common/makeup/8/matBodyColor.png",
+                        "_common/makeup/9/matBodyColor.png",
+                        "_common/makeup/10/matBodyColor.png",
+                        "_common/makeup/11/matBodyColor.png",
+                        "_common/makeup/12/matBodyColor.png",
+                        "_common/makeup/13/matBodyColor.png",
+                        "_common/makeup/14/matBodyColor.png",
+                        "_common/makeup/15/matBodyColor.png",
+                        "_common/makeup/16/matBodyColor.png",
+                        "_common/makeup/17/matBodyColor.png"
+                    ]
+                }
             },
             "alphaCutoff" : 0.5,
             "alphaMode" : "MASK",
@@ -3812,7 +3833,28 @@
         {
             "extras" : {
                 "version": 1,
-                "map": "_common/eyes/0002.png"
+                "map": {
+                    "offset": 6,
+                    "list": [
+                        "_common/makeup/1/matEyeColor.png",
+                        "_common/makeup/2/matEyeColor.png",
+                        "_common/makeup/3/matEyeColor.png",
+                        "_common/makeup/4/matEyeColor.png",
+                        "_common/makeup/5/matEyeColor.png",
+                        "_common/makeup/6/matEyeColor.png",
+                        "_common/makeup/7/matEyeColor.png",
+                        "_common/makeup/8/matEyeColor.png",
+                        "_common/makeup/9/matEyeColor.png",
+                        "_common/makeup/10/matEyeColor.png",
+                        "_common/makeup/11/matEyeColor.png",
+                        "_common/makeup/12/matEyeColor.png",
+                        "_common/makeup/13/matEyeColor.png",
+                        "_common/makeup/14/matEyeColor.png",
+                        "_common/makeup/15/matEyeColor.png",
+                        "_common/makeup/16/matEyeColor.png",
+                        "_common/makeup/17/matEyeColor.png"
+                    ]
+                }
             },
             "doubleSided" : true,
             "name" : "matEye",
@@ -3825,7 +3867,28 @@
             "extras" : {
                 "version": 1,
                 "noShadow": true,
-                "map": "_common/lashes/0002.png"
+                "map": {
+                    "offset": 6,
+                    "list": [
+                        "_common/makeup/1/matLashes.png",
+                        "_common/makeup/2/matLashes.png",
+                        "_common/makeup/3/matLashes.png",
+                        "_common/makeup/4/matLashes.png",
+                        "_common/makeup/5/matLashes.png",
+                        "_common/makeup/6/matLashes.png",
+                        "_common/makeup/7/matLashes.png",
+                        "_common/makeup/8/matLashes.png",
+                        "_common/makeup/9/matLashes.png",
+                        "_common/makeup/10/matLashes.png",
+                        "_common/makeup/11/matLashes.png",
+                        "_common/makeup/12/matLashes.png",
+                        "_common/makeup/13/matLashes.png",
+                        "_common/makeup/14/matLashes.png",
+                        "_common/makeup/15/matLashes.png",
+                        "_common/makeup/16/matLashes.png",
+                        "_common/makeup/17/matLashes.png"
+                    ]
+                }
             },
             "alphaCutoff" : 0.5,
             "alphaMode" : "MASK",
